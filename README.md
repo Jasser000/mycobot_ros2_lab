@@ -3,16 +3,22 @@
 ![OS](https://img.shields.io/ubuntu/v/ubuntu-wallpapers/noble)
 ![ROS_2](https://img.shields.io/ros/v/jazzy/rclcpp)
 
-Personal ROS 2 workspace for the myCobot robotic arm.
-This project extends the [automaticaddison/mycobot_ros2](https://github.com/automaticaddison/mycobot_ros2) repository with custom scenarios and features.
-At this stage, the focus is on **building the foundation**: model visualization, simulation, and basic control.
+Personal ROS 2 workspace for the **myCobot robotic arm**.
+This project extends the [automaticaddison/mycobot_ros2](https://github.com/automaticaddison/mycobot_ros2) repository with **custom scenarios, simulation environments, and advanced motion planning**.
 
 ---
 
-## 🚀 Current Features (Milestone 1)
-- ✅ myCobot robotic arm URDF model created and visualized in **RViz2**
-- ✅ myCobot spawned and simulated inside **Gazebo**
-- ✅ Integration with **ros2_control** for sending commands to the arm
+## 🚀 Current Capabilities (Milestone 3)
+
+- ✅ **MoveIt 2** integration for motion planning and execution
+- ✅ **Move Group** interface connected to simulated controllers
+- ✅ **MoveIt Task Constructor (MTC)** demos with multiple strategies:
+  - Alternative path costs *(default)*
+  - Cartesian planning
+  - Fallbacks
+  - IK clearance costs
+  - Modular planning
+- ✅ Unified script to launch **Gazebo + MoveIt 2 + MTC demos** in one go
 
 ---
 
@@ -55,8 +61,52 @@ bash ~/mycobot_lab_ws/src/mycobot_ros2_lab/mycobot_bringup/scripts/mycobot_280_g
 ![myCobot Gazebo Simulation and Control](docs/images/mycobot_gazebo_control.gif)
 *Figure: myCobot spawned in Gazebo and controlled in real time using ros2_control.*
 
+### 3. Task-Level Planning with MTC
+Run the unified script to start Gazebo + MoveIt 2 + MTC demos:
+```bash
+bash ~/mycobot_lab_ws/src/mycobot_ros2_lab/mycobot_bringup/scripts/mycobot_280_mtc_demos.sh <exe_option>
+```
+Available `<exe_option>` values:
+- `alternative_path_costs` (default)
+- `cartesian`
+- `fallbacks_move_to`
+- `ik_clearance_cost`
+- `modular`
+
+Example:
+
+```bash
+bash ~/mycobot_lab_ws/src/mycobot_ros2_lab/mycobot_bringup/scripts/mycobot_280_mtc_demos.sh cartesian
+```
+This will:
+- Launch **Gazebo** with *myCobot* and `ros2_control`
+- Start **Move Group** with **RViz**
+- Run the selected **MTC demo pipeline**
+
+![myCobot executing a task-level motion pipeline with MoveIt Task Constructor](docs/images/mycobot_task_level_motion_pipeline.gif)
+*Figure: myCobot executing a task-level motion pipeline with MoveIt Task Constructor.*
+
+
 ---
 
+## 🗂️ Project Timeline
+
+### Milestone 1 – Foundations
+- URDF model visualized in **RViz2**
+- myCobot spawned and simulated inside **Gazebo**
+- Integration with **ros2_control** for basic control
+
+### Milestone 2 – Motion Planning
+- Integration with **MoveIt 2**
+- Configured planning pipelines (**OMPL**, **Pilz Cartesian**, **STOMP**)
+- Motion planning and execution in simulation
+
+### Milestone 3 – Task-Level Planning *(current)*
+- Added **MoveIt Task Constructor (MTC)** demos
+- Automated bringup script for **Gazebo + MoveIt 2 + MTC**
+- Multiple planning strategies supported
+
+---
 ## 📌 Next Steps
 - Add custom pick-and-place scenarios
 - Extend perception modules for object detection

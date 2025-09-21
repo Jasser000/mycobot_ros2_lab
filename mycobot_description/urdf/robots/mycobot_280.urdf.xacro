@@ -58,7 +58,8 @@
       prefix="$(arg prefix)"
       flange_link="$(arg flange_link)"
       use_gazebo="$(arg use_gazebo)"/>
-
-    <xacro:include filename="$(find mycobot_description)/urdf/sensors/intel_rgbd_cam_d435.urdf.xacro"/>
+    <xacro:if value="$(arg use_camera)">
+      <xacro:include filename="$(find mycobot_description)/urdf/sensors/intel_rgbd_cam_d435.urdf.xacro"/>
+    </xacro:if>
 
 </robot>
